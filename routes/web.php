@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // Route::resource('/Peca', '\App\Http\Controllers\PecaController')
 //     ->middleware(['auth']);
 
@@ -33,6 +34,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified' 
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+        Route::get('/newitem', function () {
+        return view('screens/newitem');
+    })->name('newitem');
+    Route::get('/newdoador', function () {
+        return view('screens/newdoador');
+    })->name('newdoador');
+    Route::get('/joker', function () {
+        return view('screens/joker');
+    })->name('joker');
+
 
     Route::resource('/pecas', '\App\Http\Controllers\PecaController');
     Route::resource('/doador', '\App\Http\Controllers\DoadorController');

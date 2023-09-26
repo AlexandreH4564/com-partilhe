@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-18">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
@@ -15,18 +15,21 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Bem-Vindo!') }}
                     </x-nav-link>
-                    {{-- <x-nav-link href="{{ route('create') }}" :active="request()->routeIs('create')">
+                    <x-nav-link href="{{ route('newitem') }}" :active="request()->routeIs('newitem')">
                         {{ __('Nova Peça') }}
-                    </x-nav-link> --}}
-                    {{-- <x-nav-link href="{{ route('cadastro') }}" :active="request()->routeIs('cadastro')">
-                        {{ __('Retirar Itens') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('cadastro') }}" :active="request()->routeIs('cadastro')">
+                    <x-nav-link href="{{ route('newdoador') }}" :active="request()->routeIs('newdoador')">
+                        {{ __('Novo Doador') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('joker') }}" :active="request()->routeIs('joker')">
+                        {{ __('Retirar Peça') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('joker') }}" :active="request()->routeIs('joker')">
                         {{ __('Estoque') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('cadastro') }}" :active="request()->routeIs('cadastro')">
+                    <x-nav-link href="{{ route('joker') }}" :active="request()->routeIs('joker')">
                         {{ __('Carbon Credit') }}
-                    </x-nav-link> --}}
+                    </x-nav-link> 
                 </div>
             </div>
 
