@@ -6,36 +6,42 @@ use App\Models\Creditos;
 use App\Models\Doador;
 use App\Models\Peca;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Importe a classe DB
 
 class PecaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function retirarPeca(Request $request)
     {
-        //
+        $request->validate([
+            'codigo' => 'required|string',
+            'email_retirar' => 'required|string',
+            'valor_retirar' => 'required|integer'
+        ]);
+
+        $peca = Peca::where('codigo', strtoupper($request->codigo))->get();
+
+        if(!$peca){
+            return '<h1>Peça não encontrada!</h1>';
+        }
+
+        $doador = Doador::where('email', mb_strtoupper($request->email_retirar, 'UTF-8'))->get();
+
+        if(!$doador){
+            return '<h1>Doador não encontrado!</h1>';
+        }
+
+        Peca::destroy($peca[0]->id);
+
+        $doador[0]->fill([
+            'total_creditos' => ($doador[0]->total_creditos - $request->valor_retirar),
+            'creditos_usados' => ($doador[0]->creditos_usados + $request->valor_retirar),
+        ]);
+        $doador[0]->save();
+
+        return '<h1>Peça retirada com sucesso!</h1>';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('pecas.store');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function criarPeca(Request $request)
     {
         $request->validate([
             'cor' => 'required|string',
@@ -62,51 +68,12 @@ class PecaController extends Controller
         $creditos->credito = $request->creditos;
         $creditos->save();
 
-        return '<h1>Peca cadastrada com sucesso!</h1>';
-    }
+        $doador[0]->fill([
+            'total_creditos' => ($doador[0]->total_creditos + $creditos->credito)
+        ]);
+        $doador[0]->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // return view('dashboard');
+        return '<h1>Peça cadastrada com sucesso!</h1>';
     }
 }

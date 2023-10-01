@@ -18,16 +18,16 @@
                     <x-nav-link href="{{ route('newitem') }}" :active="request()->routeIs('newitem')">
                         {{ __('Nova Peça') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('newdoador') }}" :active="request()->routeIs('newdoador')">
-                        {{ __('Novo Doador') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('joker') }}" :active="request()->routeIs('joker')">
-                        {{ __('Retirar Peça') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('joker') }}" :active="request()->routeIs('joker')">
+                    <x-nav-link href="{{ route('estoque') }}" :active="request()->routeIs('estoque')">
                         {{ __('Estoque') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('joker') }}" :active="request()->routeIs('joker')">
+                    <x-nav-link href="{{ route('retirar') }}" :active="request()->routeIs('retirar')">
+                        {{ __('Retirar Peça') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('controle') }}" :active="request()->routeIs('controle')">
+                        {{ __('Controle') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Carbon Credit') }}
                     </x-nav-link> 
                 </div>

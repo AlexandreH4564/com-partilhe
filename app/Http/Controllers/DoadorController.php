@@ -7,33 +7,34 @@ use Illuminate\Http\Request;
 
 class DoadorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function verSaldo(Request $request)
     {
-        return view('pecas.create');
+        $doador = Doador::where('email', mb_strtoupper($request->email, 'UTF-8'))->get();
+        return $doador[0]->total_creditos;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function aplicarCredito(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|string'
+        ]);
+
+        $doador = Doador::where('email', mb_strtoupper($request->email, 'UTF-8'))->get();
+
+        if(!$doador){
+            return '<h1>Doador não encontrado!</h1>';
+        }
+
+        $doador[0]->fill([
+            'total_creditos' => ($doador[0]->total_creditos + $request->creditos)
+        ]);
+        $doador[0]->save();
+
+        return '<h1>Credito aplicado com sucesso!</h1>';
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function criarDoador(Request $request)
     {
         $request->validate([
             'nome' => 'required|string',
@@ -48,50 +49,5 @@ class DoadorController extends Controller
         return '<h1>Doador cadastrado com sucesso!</h1>';
 
         // return redirect()->route('doador.create')->with('success', 'Peça cadastrada com sucesso!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

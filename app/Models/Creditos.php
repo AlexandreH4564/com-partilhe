@@ -9,7 +9,7 @@ class Creditos extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['doador_id', 'peca_id', 'credito', 'usado'];
+    protected $fillable = ['doador_id', 'peca_id', 'credito', ];
 
     public function doador() {
         return $this->belongsTo('App\Models\Doador');

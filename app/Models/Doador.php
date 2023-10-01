@@ -9,5 +9,5 @@ class Doador extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'nome', 'email'];
+    protected $fillable = ['id', 'nome', 'email', 'total_creditos', 'creditos_usados'];
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('peca_id');
             $table->foreign('peca_id')->references('id')->on('pecas');
             $table->integer('credito');
-            $table->boolean('usado')->default(false);
             $table->timestamps();
         });
     }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email');
+            $table->integer('total_creditos')->default(0);
+            $table->integer('creditos_usados')->default(0);
             $table->timestamps();
         });
     }

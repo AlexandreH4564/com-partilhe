@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DoadorController;
+use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\PecaController;
+use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Middleware;
 
 /*
@@ -40,15 +42,26 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified' 
     Route::get('/newdoador', function () {
         return view('screens/newdoador');
     })->name('newdoador');
-    Route::get('/joker', function () {
-        return view('screens/joker');
-    })->name('joker');
+    Route::get('/retirar', function () {
+        return view('screens/retirar');
+    })->name('retirar');
+    Route::get('/controle', function () {
+        return view('screens/controle');
+    })->name('controle');
 
+    Route::controller(EstoqueController::class)->group(function () {
+        Route::get('/estoque', 'estoque')->name('estoque');
+    });
 
-    Route::resource('/pecas', '\App\Http\Controllers\PecaController');
-    Route::resource('/doador', '\App\Http\Controllers\DoadorController');
-    // Route::get('/pecas/create', 'PecaController@create')->name('pecas.create');
-    // Route::post('/pecas', 'PecaController@store')->name('pecas.store');
+    Route::controller(DoadorController::class)->group(function () {
+        Route::post('/doador/aplicar', 'aplicarCredito')->name('doador.aplicarCredito');
+        Route::post('/doador/ver_saldo', 'verSaldo')->name('doador.verSaldo');
+        Route::post('/doador/criar_doador', 'criarDoador')->name('doador.criarDoador');
+    });
 
+    Route::controller(PecaController::class)->group(function () {
+        Route::post('/pecas/retirar', 'retirarPeca')->name('pecas.retirarPeca');
+        Route::post('/pecas/criar_peca', 'criarPeca')->name('pecas.criarPeca');
+    });
 });
 

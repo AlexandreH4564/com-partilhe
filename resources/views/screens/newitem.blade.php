@@ -25,7 +25,7 @@
 
 
         <div class="container">
-            <form action="{{ route('pecas.store') }}" method="POST">
+            <form action="{{ route('pecas.criarPeca') }}" method="POST">
                 @csrf
 
                 <div class="lineA">
@@ -83,7 +83,7 @@
                         </label>
                     </div>
 
-                    {{-- Creditos Box --}}
+                    <!-- {{-- Creditos Box --}} -->
                     <div class="form-group">
                         <label for="creditos">
                             Partilhes
@@ -99,7 +99,12 @@
                 </div>
             </form>
         </div>
-
+        <div class="modal">
+            <p>
+                Peça cadastrada com sucesso!
+            </p>
+        </div>
 @livewireScripts
 </body>
+<script src="/JavaScript/modal.js"></script>
 </html>
