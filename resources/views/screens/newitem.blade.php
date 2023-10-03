@@ -99,12 +99,15 @@
                 </div>
             </form>
         </div>
-        <div class="modal">
-            <p>
-                Peça cadastrada com sucesso!
-            </p>
+        <div class="container-fluid">
+            <div class="row">
+                @if(session('msg'))
+                <p class="msg" id="msg">{{ session('msg') }}</p>
+                @endif
+                @yield('content')
+            </div>
         </div>
 @livewireScripts
+<script src="js/modal.js"></script>
 </body>
-<script src="/JavaScript/modal.js"></script>
 </html>
