@@ -20,13 +20,13 @@ class PecaController extends Controller
 
         $peca = Peca::where('codigo', strtoupper($request->codigo))->get();
 
-        if(!$peca){
+        if (!$peca) {
             return '<h1>Peça não encontrada!</h1>';
         }
 
         $doador = Doador::where('email', mb_strtoupper($request->email_retirar, 'UTF-8'))->get();
 
-        if(!$doador){
+        if (!$doador) {
             return '<h1>Doador não encontrado!</h1>';
         }
 
@@ -50,14 +50,27 @@ class PecaController extends Controller
             'email_doador' => 'required|string',
             'creditos' => 'required|integer',
         ]);
-        
+
         $peca = new Peca();
         $peca->cor = mb_strtoupper($request->cor, 'UTF-8');
         $peca->tipo = mb_strtoupper($request->tipo, 'UTF-8');
         $peca->material = mb_strtoupper($request->material, 'UTF-8');
         $peca->codigo = mb_strtoupper($request->codigo, 'UTF-8');
+
+        //Imagem
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $requestImage = $request->image;
+            $extension = $requestImage->getClientOriginalExtension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+
+            $requestImage->move(public_path('img/pecas'), $imageName);
+
+            $peca->image = $imageName;
+        }
+
+
         $peca->save();
-        
+
         $doador = Doador::where('email', mb_strtoupper($request->email_doador, 'UTF-8'))->get();
         $peca_cadastrada = Peca::where('codigo', mb_strtoupper($request->codigo, 'UTF-8'))->get();
 

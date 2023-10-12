@@ -25,7 +25,7 @@
 
 
         <div class="container">
-            <form action="{{ route('pecas.criarPeca') }}" method="POST">
+            <form action="{{ route('pecas.criarPeca') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="lineA">
@@ -92,7 +92,16 @@
                             </div>
                         </label>
                     </div>
+
+                    <div class="form-group">
+                        <label for="image">
+                            image
+                            <div class="input-field">
+                                <input type="file" name="image" class="form-control" required>
+                            </div>
+                        </label>
                     </div>
+                </div>
 
                 <div class="btn">
                     <button type="submit" class="botao">Cadastrar Nova Peça</button>

@@ -22,13 +22,13 @@
     <div class="min-h-screen">
         @livewire('navigation-menu')
 
-
-        <h1>Estoque de Peças de Roupa</h1>
         
+    <section class="tabela">
         <table class="estoque-table">
             <thead>
                 <tr>
-                    <th>id da peca</th>
+                    <th>Imagem</th>
+                  
                     <th>Codigo</th>
                     <th>Tipo</th>
                     <th>Cor</th>
@@ -39,8 +39,11 @@
             <tbody>
                 @foreach($estoque as $peca)
                     <tr>
-                        <td>{{ $peca->id }}</td>
+                        <td>
+                            <img src="{{ asset('img/pecas/' . $peca->image) }}"  alt="{{ $peca->image }}" width="100" height="100"class="foto">
+                        </td>
                         <td>{{ $peca->codigo }}</td>
+
                         <td>{{ $peca->tipo }}</td>
                         <td>{{ $peca->cor }}</td>
                         <td>{{ $peca->material }}</td>
@@ -49,4 +52,5 @@
                 @endforeach
             </tbody>
         </table>
+    </section>
     

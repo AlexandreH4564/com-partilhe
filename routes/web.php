@@ -21,6 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/teste', function () {
+    return view('screens/teste');
+});
+
+
 
 // Route::resource('/Peca', '\App\Http\Controllers\PecaController')
 //     ->middleware(['auth']);
