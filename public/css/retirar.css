@@ -6,6 +6,23 @@ body {
     background-image: url(/img/retirar.jpg);
 }
 
+.msg {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    width: 450px;
+    margin-left: 120px;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.msg.hidden {
+    opacity: 0;
+    display: none;
+}
 
 .container {
     margin-left: 90px;

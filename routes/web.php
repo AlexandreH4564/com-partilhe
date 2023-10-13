@@ -4,6 +4,7 @@ use App\Http\Controllers\DoadorController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\PecaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MsgaccessController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -52,7 +53,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified' 
     })->name('retirar');
     Route::get('/controle', function () {
         return view('screens/controle');
-    })->name('controle');
+    })->name('controle') ->middleware(['admin']);
 
     Route::controller(EstoqueController::class)->group(function () {
         Route::get('/estoque', 'estoque')->name('estoque');

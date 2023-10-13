@@ -9,10 +9,10 @@ class Creditos extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['doador_id', 'peca_id', 'credito', ];
+    protected $fillable = ['user_id', 'peca_id', 'credito', ];
 
-    public function doador() {
-        return $this->belongsTo('App\Models\Doador');
+    public function user() {
+        return $this->belongsTo('App\Models\User');
     }
 
     public function peca() {

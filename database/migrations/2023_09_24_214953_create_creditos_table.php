@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('creditos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('doador_id');
-            $table->foreign('doador_id')->references('id')->on('doadors');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('peca_id');
             $table->foreign('peca_id')->references('id')->on('pecas');
             $table->integer('credito');

@@ -27,9 +27,15 @@
                     <x-nav-link href="{{ route('controle') }}" :active="request()->routeIs('controle')">
                         {{ __('Controle') }}
                     </x-nav-link>
+
+                    {{-- teste permissão --}}
+                    @can('navbar')
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Carbon Credit') }}
                     </x-nav-link> 
+                    @endcan
+
+
                 </div>
             </div>
 

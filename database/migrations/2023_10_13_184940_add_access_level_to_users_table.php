@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('doadors', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome');
-            $table->string('email');
-            $table->integer('total_creditos')->default(0);
-            $table->integer('creditos_usados')->default(0);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('access_level')->default(2);
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doadors');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

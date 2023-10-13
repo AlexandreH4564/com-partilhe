@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Doador;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DoadorController extends Controller
@@ -10,8 +10,9 @@ class DoadorController extends Controller
 
     public function verSaldo(Request $request)
     {
-        $doador = Doador::where('email', mb_strtoupper($request->email, 'UTF-8'))->get();
-        return $doador[0]->total_creditos;
+        $doador = User::where('email', mb_strtoupper($request->email, 'UTF-8'))->get();
+        // return $doador[0]->total_creditos;
+        return redirect('/controle')->with('msg', $doador[0]->total_creditos);
     }
 
     public function aplicarCredito(Request $request)
@@ -20,7 +21,7 @@ class DoadorController extends Controller
             'email' => 'required|string'
         ]);
 
-        $doador = Doador::where('email', mb_strtoupper($request->email, 'UTF-8'))->get();
+        $doador = User::where('email', mb_strtoupper($request->email, 'UTF-8'))->get();
 
         if(!$doador){
             return '<h1>Doador não encontrado!</h1>';
@@ -34,20 +35,20 @@ class DoadorController extends Controller
         return '<h1>Credito aplicado com sucesso!</h1>';
     }
 
-    public function criarDoador(Request $request)
-    {
-        $request->validate([
-            'nome' => 'required|string',
-            'email' => 'required|string'
-        ]);
+    // public function criarDoador(Request $request)
+    // {
+    //     $request->validate([
+    //         'nome' => 'required|string',
+    //         'email' => 'required|string'
+    //     ]);
 
-        $obj_doador = new Doador();
-        $obj_doador->nome = mb_strtoupper($request->nome, 'UTF-8');
-        $obj_doador->email = mb_strtoupper($request->email, 'UTF-8');
-        $obj_doador->save();
+    //     $obj_doador = new Doador();
+    //     $obj_doador->nome = mb_strtoupper($request->nome, 'UTF-8');
+    //     $obj_doador->email = mb_strtoupper($request->email, 'UTF-8');
+    //     $obj_doador->save();
 
-        return '<h1>Doador cadastrado com sucesso!</h1>';
+    //     return '<h1>Doador cadastrado com sucesso!</h1>';
 
-        // return redirect()->route('doador.create')->with('success', 'Peça cadastrada com sucesso!');
-    }
+    //     // return redirect()->route('doador.create')->with('success', 'Peça cadastrada com sucesso!');
+    // }
 }

@@ -23,6 +23,15 @@
     <div class="min-h-screen">
         @livewire('navigation-menu')
 
+        <div class="container-fluid">
+            <div class="row">
+                @if(session('msg'))
+                <p class="msg" id="msg">O crédito do usario é:   {{session('msg') }}</p>
+                @endif
+                @yield('content')
+            </div>
+        </div>
+
 
         <div class="cadastro-d-container">
             <h1>Cadastrar Novo Doador</h1>
@@ -79,8 +88,8 @@
                         <div class="btn">
                             <button type="submit" class="botao">Verificar</button>
                         </div>
-
                 </form>
+
             </div>
         </div>
 
@@ -123,5 +132,6 @@
 
        
 @livewireScripts
+<script src="js/modal.js"></script>
 </body>
 </html>
